@@ -10,7 +10,6 @@ const createNewFlight = (req, res) => {
   newFlight
     .save()
     .then((result) => {
-      console.log(result);
 
       res.status(201).json({ success: true, message: "new flight  created" });
     })
@@ -85,16 +84,20 @@ const updateFlightCapacity = (req, res, next) => {
 };
 
 const getAvailableFlights = (req, res, next) => {
-  const { origin, destination, adults, dateFrom, dateTo } = req.body;
+  const { origin, destination, dateFrom, adults, dateTo } = req.body;
 
   flightModel
     .find({
       date: {
-        $gte:  Date.parse(dateFrom),
-        $lte:  Date.parse(dateTo),
+        $gte: dateFrom,
+        $lte: dateTo,
+      },
+      origin,
+      destination,
+      capacity: {
+        $gte: adults,
       },
     })
- //ok
 
     .then((result) => {
       if (!result) {
@@ -116,8 +119,6 @@ const getAvailableFlights = (req, res, next) => {
         message: `Server Error`,
       });
     });
-
-  // next();
 };
 
 module.exports = {
