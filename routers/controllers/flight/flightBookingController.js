@@ -18,7 +18,7 @@ const isBookingExist = (req, res, next) => {
           if (result.userId != req.token.userId) {
             return res.status(403).json({
               success: false,
-              message: `The Booking => ${bookingId} is not related for this account you dont have the auth to delete`,
+              message: `The Booking => ${bookingId} is not related for this account you dont have the auth to delete `,
             });
           } else {
             //have the auth
