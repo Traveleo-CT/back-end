@@ -8,7 +8,8 @@ const app = express();
 const hotelBookingRouter = require("./routers/routes/hotel/hotelBooking");
 const hotelRouter = require("./routers/routes/hotel/hotel");
 const flightBookingRouter = require("./routers/routes/flightRoutes/flightBooking");
-const payRouter=require("./routers/routes/stripe");
+const payRouter = require("./routers/routes/stripe");
+const contactRouter = require("./routers/routes/contactRoute");
 //routers
 
 //built-in middleware
@@ -19,13 +20,14 @@ app.use(cors());
 
 //app routers
 
-app.use("/login", loginRouter)
-app.use("/flights", flightRouter)
-app.use("/flightBooking", flightBookingRouter)
+app.use("/login", loginRouter);
+app.use("/flights", flightRouter);
+app.use("/flightBooking", flightBookingRouter);
 app.use("/hotelBooking", hotelBookingRouter);
 app.use("/hotel", hotelRouter);
 app.use("/signUp", signUpRouter);
-app.use("/payment",payRouter);
+app.use("/payment", payRouter);
+app.use("/contact", contactRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server On ${PORT}`);
